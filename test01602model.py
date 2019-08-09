@@ -71,12 +71,28 @@ def insertData(requestForm):
     with closing(sqlite3.connect(dbname)) as conn:
         # カーソル取得
         cur = conn.cursor()
+        #  最大会社ID取得
         for v in cur.execute(selectMaxcompanyId):
             pass
-        if (int(v[0]) + 1) > 99999999:
-            return None
+        if v is not None:
+            num = 0
+        else:
+            num = int(v[0]) + 1
 
-        maxcompanyId = str(int(v[0]) + 1).zfill(8)
+        # チェック　companyId　
+        if num > 99999999:
+            return None
+        # チェック　companyName 型、桁数
+        if requestForm['companyName']:
+            pass
+        # チェック　telephoneNumber　型、桁数、数字、ハイフン
+        if requestForm['telephoneNumber']:
+            pass
+            # チェック　address　型、桁数
+        if requestForm['address']:
+            pass
+
+        maxcompanyId = str(num).zfill(8)
         row = (maxcompanyId, requestForm['companyName'], requestForm['telephoneNumber'], requestForm['address'],
                requestForm['discription'])
         cur.execute(insertTable, row)
