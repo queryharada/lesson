@@ -19,25 +19,30 @@ def index():
 
 @app.route('/router', methods=['POST'])
 def router():
-    footerMessage = ''
+    messageId = '000'
 
     if not 'procSelect' in request.form:
         rowList = selectData()
-        footerMessage = '処理を選択されていません'
+        messageId = '001'  # '処理が選択されていません'
         companyId = ''
-        return makeHtml(rowList, companyId, footerMessage)
+        return makeHtml(rowList, companyId, messageId)
 
     if request.form['procSelect'] == 'select':
+        if not 'companyId' in request.form:
+            messageId = '003'  # ''会社一覧が選択されていません'
+            companyId = ''
+        else:
+            companyId = request.form['companyId']
+
         rowList = selectData()
-        return makeHtml(rowList, request.form['companyId'])
+        return makeHtml(rowList, companyId, messageId)
 
     if request.form['procSelect'] == 'insert':
         companyId = insertData(request.form)
-
         if companyId == None:
-            footerMessage = 'companyIdは99999999を超えて採番できません'
+            messageId = '002'  # 'companyIdは99999999を超えて採番できません'
         rowList = selectData()
-        return makeHtml(rowList, companyId, footerMessage)
+        return makeHtml(rowList, companyId, messageId)
 
     if request.form['procSelect'] == 'update':
         updateData(request.form)
@@ -45,10 +50,13 @@ def router():
         return makeHtml(rowList, request.form['companyId'])
 
     if request.form['procSelect'] == 'delete':
-        deleteData(request.form['companyId'])
+        if not 'companyId' in request.form:
+            messageId = '003'  # ''会社一覧が選択されていません'
+        else:
+            deleteData(request.form['companyId'])
+        companyId = ''
         rowList = selectData()
-        return makeHtml(rowList)
-
+        return makeHtml(rowList,companyId, messageId)
 
 if __name__ == '__main__':
     initdb()
