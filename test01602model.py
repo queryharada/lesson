@@ -15,8 +15,8 @@ createTable = '''create table company (
                     discription text
                 )'''
 insertTable = 'insert into company (companyId, companyName, telephoneNumber, address, discription) values (?,?,?,?,?)'
-insertData = [
-    ('12345678', 'ABC', '0354762911', '住所', '説明'),
+initData = [
+    ('99999998', 'ABC', '0354762911', '住所', '説明'),
     ('00000001', 'ABC1', '0422111163', '住所１', '説明１'),
     ('00000002', 'ABC2', '08012345678', '住所２', '説明２'),
     ('00000003', 'ABC3', '035476291', '住所３', '説明３'),
@@ -26,8 +26,10 @@ insertData = [
 selectTable = 'select * from company'
 
 selectMaxcompanyId = 'select max(companyId) from company'
-editTable = 'UPDATE company SET companyName=?, telephoneNumber=?, address=?, discription=? WHERE companyId=?'
-delTable = 'DELETE from company WHERE companyId=?'
+updateTable = 'UPDATE company SET companyName=?, telephoneNumber=?, address=?, discription=? WHERE companyId=?'
+#  うまく展開しないため、formatで対応した
+# delTable = 'DELETE from company WHERE companyId=? '
+delTable = 'DELETE from company WHERE companyId="{0}" '
 
 
 #
@@ -41,7 +43,7 @@ def initdb():
         cur.execute(dropTable)
         cur.execute(createTable)
         # executemanyメソッドを実行する
-        cur.executemany(insertTable, insertData)
+        cur.executemany(insertTable, initData)
         # コミット
         conn.commit()
 
@@ -66,18 +68,20 @@ def selectData():
 #
 def insertData(requestForm):
     maxcompanyId = ''
-    rowData = list()
     with closing(sqlite3.connect(dbname)) as conn:
         # カーソル取得
         cur = conn.cursor()
-        for maxcompanyId in cur.execute(selectMaxcompanyId):
+        for v in cur.execute(selectMaxcompanyId):
             pass
-        i = str(int(maxcompanyId[0]) + 1).zfill(8)
-        row = (i, requestForm['companyName'], requestForm['telephoneNumber'], requestForm['address'],
+        if (int(v[0]) + 1) > 99999999:
+            return None
+
+        maxcompanyId = str(int(v[0]) + 1).zfill(8)
+        row = (maxcompanyId, requestForm['companyName'], requestForm['telephoneNumber'], requestForm['address'],
                requestForm['discription'])
         cur.execute(insertTable, row)
         conn.commit()
-    return i
+    return maxcompanyId
 
 
 #
@@ -91,7 +95,7 @@ def updateData(requestForm):
             requestForm['companyName'], requestForm['telephoneNumber'], requestForm['address'],
             requestForm['discription'],
             requestForm['companyId'])
-        cur.execute(editTable, row)
+        cur.execute(updateTable, row)
         conn.commit()
     return requestForm['companyId']
 
@@ -103,10 +107,5 @@ def deleteData(companyId):
     with closing(sqlite3.connect(dbname)) as conn:
         # カーソル取得
         cur = conn.cursor()
-        row = (companyId)
-        cur.execute(delTable, row)
-        # cur.execute("delete from company WHERE companyId='?'",companyId)
+        cur.execute(delTable.format(companyId))
         conn.commit()
-
-if __name__ == "__main__"
-    pass

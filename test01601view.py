@@ -31,7 +31,7 @@ tableTh = '''  <p>＜会社一覧＞</p>
                   </tr>
           '''
 tableTd = '''     <tr>
-                    <td bgcolor="{5}" align="center" width="10"><input type="radio" name="companyId" value="{0}"></td>
+                    <td bgcolor="{5}" align="center" width="10"><input type="radio" name="companyId" value="{0}" {6}></td>
                     <td bgcolor="{5}" valign="top" width="150">{0}</td>
                     <td bgcolor="{5}" valign="top" width="200">{1}</td>
                     <td bgcolor="{5}" valign="top" width="200">{2}</td>
@@ -54,22 +54,32 @@ inputTextarea = '''  <p>＜会社更新＞</p>
                      <p>説明:<textarea name="discription" rows="5" cols="60">{4}</textarea></p>
                 '''
 
+#
+# footer
+#
+footerText = '''
+                    <p>{0}</p>
+            '''
+
 
 #
 # HTML作成
 #
-def makeHtml(rowList, companyId=''):
+def makeHtml(rowList, companyId='', footerMessage=''):
     htmlBuff = formStat + tableTh
     htmlBuff2 = inputTextarea.format('', '', '', '', '')
+
     for row in rowList:
         if companyId == row[0]:
-            htmlBuff = htmlBuff + tableTd.format(row[0], row[1], row[2], row[3], row[4], '#ffc0cb')
+            htmlBuff = htmlBuff + tableTd.format(row[0], row[1], row[2], row[3], row[4], '#ffc0cb', 'checked="checked"')
             htmlBuff2 = inputTextarea.format(row[0], row[1], row[2], row[3], row[4])
         else:
-            htmlBuff = htmlBuff + tableTd.format(row[0], row[1], row[2], row[3], row[4], '#F2F2F2')
-    htmlBuff = htmlBuff + tableTc + htmlBuff2 + formEnd
+            htmlBuff = htmlBuff + tableTd.format(row[0], row[1], row[2], row[3], row[4], '#F2F2F2', '')
+
+    htmlBuff = htmlBuff + \
+               tableTc + \
+               htmlBuff2 + \
+               footerText.format(footerMessage) + \
+               formEnd
+
     return htmlBuff
-
-
-if __name__ == "__main__"
-    pass

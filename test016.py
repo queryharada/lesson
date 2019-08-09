@@ -19,14 +19,25 @@ def index():
 
 @app.route('/router', methods=['POST'])
 def router():
+    footerMessage = ''
+
+    if not 'procSelect' in request.form:
+        rowList = selectData()
+        footerMessage = '処理を選択されていません'
+        companyId = ''
+        return makeHtml(rowList, companyId, footerMessage)
+
     if request.form['procSelect'] == 'select':
         rowList = selectData()
         return makeHtml(rowList, request.form['companyId'])
 
     if request.form['procSelect'] == 'insert':
         companyId = insertData(request.form)
+
+        if companyId == None:
+            footerMessage = 'companyIdは99999999を超えて採番できません'
         rowList = selectData()
-        return makeHtml(rowList, companyId)
+        return makeHtml(rowList, companyId, footerMessage)
 
     if request.form['procSelect'] == 'update':
         updateData(request.form)
@@ -34,9 +45,9 @@ def router():
         return makeHtml(rowList, request.form['companyId'])
 
     if request.form['procSelect'] == 'delete':
+        deleteData(request.form['companyId'])
         rowList = selectData()
-        deleteData(rowList, request.form['companyId'])
-        return makeHtml('')
+        return makeHtml(rowList)
 
 
 if __name__ == '__main__':
