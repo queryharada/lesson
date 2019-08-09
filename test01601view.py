@@ -63,9 +63,11 @@ inputTextarea = ''' <p>＜会社更新＞</p>
 footerMessage = dict()
 footerMessage['000'] = '<br>'
 footerMessage['001'] = '処理が選択されていません'
-footerMessage['002'] = '会社Idは99999999を超えて採番できません'
-footerMessage['003'] = '会社一覧が選択されていません'
-
+footerMessage['002'] = '会社一覧が選択されていません'
+footerMessage['101'] = '会社Idは99999999を超えて採番できません'
+footerMessage['102'] = '会社名、桁数を超えている'
+footerMessage['103'] = '電話番号、桁数を超えている'
+footerMessage['104'] = '住所、桁数を超えている'
 
 #
 # HTML作成

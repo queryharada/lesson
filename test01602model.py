@@ -48,6 +48,34 @@ def initdb():
         conn.commit()
 
 
+def checkCompanyId(num):
+    # チェック　companyId　
+    if num > 99999999:
+        return True
+    return False
+
+
+def checkCompanyName(companyName):
+    # チェック　companyName 型、桁数
+    if len(companyName) > 40:
+        return True
+    return False
+
+
+def checkTelephoneNumber(telephoneNumber):
+    # チェック　telephoneNumber　型、桁数、数字、ハイフン
+    if len(telephoneNumber) > 12:
+        return True
+    return False
+
+
+def checkAddress(address):
+    # チェック　address　型、桁数
+    if len(address) > 256:
+        return True
+    return False
+
+
 #
 # DBからデータを取得
 #
@@ -67,53 +95,77 @@ def selectData():
 # DBへデータを追加 insertData名はNG
 #
 def insertData(requestForm):
-    maxcompanyId = ''
+    # チェック　companyName 型、桁数
+    if checkCompanyName(requestForm['companyName']):
+        return None, '102'
+
+    # チェック　telephoneNumber　型、桁数、数字、ハイフン
+    if checkTelephoneNumber(requestForm['telephoneNumber']):
+        return None, '103'
+
+    # チェック　address　型、桁数
+    if checkAddress(requestForm['address']):
+        return None, '104'
+
     with closing(sqlite3.connect(dbname)) as conn:
         # カーソル取得
         cur = conn.cursor()
         #  最大会社ID取得
         for v in cur.execute(selectMaxcompanyId):
             pass
+
+        #  カウント(+1)する。
         if v is not None:
             num = 0
         else:
             num = int(v[0]) + 1
-
         # チェック　companyId　
-        if num > 99999999:
-            return None
-        # チェック　companyName 型、桁数
-        if requestForm['companyName']:
-            pass
-        # チェック　telephoneNumber　型、桁数、数字、ハイフン
-        if requestForm['telephoneNumber']:
-            pass
-            # チェック　address　型、桁数
-        if requestForm['address']:
-            pass
+        if checkCompanyId(num):
+            return None, '101'
 
-        maxcompanyId = str(num).zfill(8)
-        row = (maxcompanyId, requestForm['companyName'], requestForm['telephoneNumber'], requestForm['address'],
-               requestForm['discription'])
+        maxId = str(num).zfill(8)
+        row = (
+            maxId,
+            requestForm['companyName'],
+            requestForm['telephoneNumber'],
+            requestForm['address'],
+            requestForm['discription']
+        )
         cur.execute(insertTable, row)
         conn.commit()
-    return maxcompanyId
+
+    return maxId, '000'
 
 
 #
 # DBのデータを更新
 #
 def updateData(requestForm):
+    # チェック　companyName 型、桁数
+    if checkCompanyName(requestForm['companyName']):
+        return None, '102'
+
+    # チェック　telephoneNumber　型、桁数、数字、ハイフン
+    if checkTelephoneNumber(requestForm['telephoneNumber']):
+        return None, '103'
+
+    # チェック　address　型、桁数
+    if checkAddress(requestForm['address']):
+        return None, '104'
+
     with closing(sqlite3.connect(dbname)) as conn:
         # カーソル取得
         cur = conn.cursor()
         row = (
-            requestForm['companyName'], requestForm['telephoneNumber'], requestForm['address'],
+            requestForm['companyName'],
+            requestForm['telephoneNumber'],
+            requestForm['address'],
             requestForm['discription'],
-            requestForm['companyId'])
+            requestForm['companyId']
+        )
         cur.execute(updateTable, row)
         conn.commit()
-    return requestForm['companyId']
+    return requestForm['companyId'], '000'
 
 
 #

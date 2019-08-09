@@ -29,7 +29,7 @@ def router():
 
     if request.form['procSelect'] == 'select':
         if not 'companyId' in request.form:
-            messageId = '003'  # ''会社一覧が選択されていません'
+            messageId = '002'  # ''会社一覧が選択されていません'
             companyId = ''
         else:
             companyId = request.form['companyId']
@@ -38,25 +38,24 @@ def router():
         return makeHtml(rowList, companyId, messageId)
 
     if request.form['procSelect'] == 'insert':
-        companyId = insertData(request.form)
-        if companyId == None:
-            messageId = '002'  # 'companyIdは99999999を超えて採番できません'
+        companyId, messageId = insertData(request.form)
         rowList = selectData()
         return makeHtml(rowList, companyId, messageId)
 
     if request.form['procSelect'] == 'update':
-        updateData(request.form)
+        companyId, messageId = updateData(request.form)
         rowList = selectData()
-        return makeHtml(rowList, request.form['companyId'])
+        return makeHtml(rowList, companyId, messageId)
 
     if request.form['procSelect'] == 'delete':
         if not 'companyId' in request.form:
-            messageId = '003'  # ''会社一覧が選択されていません'
+            messageId = '002'  # ''会社一覧が選択されていません'
         else:
             deleteData(request.form['companyId'])
         companyId = ''
         rowList = selectData()
-        return makeHtml(rowList,companyId, messageId)
+        return makeHtml(rowList, companyId, messageId)
+
 
 if __name__ == '__main__':
     initdb()
