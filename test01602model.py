@@ -34,7 +34,7 @@ initData = [
     ('00000004', 'ABC4', '035476291', '住所４', '説明４'),
     ('00000005', 'ABC5', '035476291', '住所５', '説明５')
 ]
-selectTable = 'select * from company'
+selectTable = 'select * from company order by companyId'
 
 selectMaxcompanyId = 'select max(companyId) from company'
 
