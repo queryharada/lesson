@@ -12,7 +12,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # DBからデータを取得
+    #
+    # 初期(DBからデータを取得)
+    #
     rowList = selectData()
     return makeHtml(rowList)
 
@@ -21,14 +23,18 @@ def index():
 def router():
     messageId = '000'
 
-    # 処理が選択されていません'
+    #
+    # 処理選択チェック
+    #
     if not 'procSelect' in request.form:
         rowList = selectData()
         messageId = '001'
         companyId = ''
         return makeHtml(rowList, companyId, messageId)
 
-    # 会社一覧選択
+    #
+    # 選択
+    #
     if request.form['procSelect'] == 'select':
         if not 'companyId' in request.form:
             messageId = '002'  # ''会社一覧が選択されていません'
@@ -39,13 +45,17 @@ def router():
         rowList = selectData()
         return makeHtml(rowList, companyId, messageId)
 
+    #
     # 新規
+    #
     if request.form['procSelect'] == 'insert':
         companyId, messageId = insertData(request.form)
         rowList = selectData()
         return makeHtml(rowList, companyId, messageId)
 
+    #
     # 更新
+    #
     if request.form['procSelect'] == 'update':
         if not 'companyId' in request.form:
             messageId = '002'  # ''会社一覧が選択されていません'
@@ -56,7 +66,9 @@ def router():
         rowList = selectData()
         return makeHtml(rowList, companyId, messageId)
 
+    #
     # 削除
+    #
     if request.form['procSelect'] == 'delete':
         if not 'companyId' in request.form:
             messageId = '002'  # ''会社一覧が選択されていません'
@@ -68,6 +80,13 @@ def router():
 
 
 if __name__ == '__main__':
+    #
+    #  DB初期化
+    #
     initdb()
+
+    #
+    #  FLASK起動
+    #
     app.debug = True
     app.run(host='127.0.0.1', port=8080)
