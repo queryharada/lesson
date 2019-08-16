@@ -66,6 +66,10 @@ def checkTelephoneNumber(telephoneNumber):
     # チェック　telephoneNumber　型、桁数、数字、ハイフン
     if len(telephoneNumber) > 12:
         return True
+
+    if not telephoneNumber.isnumeric():
+        return True
+
     return False
 
 
@@ -115,7 +119,7 @@ def insertData(requestForm):
             pass
 
         #  カウント(+1)する。
-        if v is not None:
+        if v is None:
             num = 0
         else:
             num = int(v[0]) + 1
