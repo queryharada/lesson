@@ -6,7 +6,9 @@ from contextlib import closing
 # sqlite実行SQL文
 #
 dbname = 'company.db'
+
 dropTable = 'drop table company'
+
 createTable = '''create table company (
                     companyId  char(8) primary key,
                     companyName varchar(128),
@@ -14,7 +16,16 @@ createTable = '''create table company (
                     address varchar(256),
                     discription text
                 )'''
-insertTable = 'insert into company (companyId, companyName, telephoneNumber, address, discription) values (?,?,?,?,?)'
+
+insertTable = '''insert into company (
+                                companyId, 
+                                companyName, 
+                                telephoneNumber, 
+                                address, 
+                                discription
+                                ) values (?,?,?,?,?)
+              '''
+
 initData = [
     ('99999998', 'ABC', '0354762911', '住所', '説明'),
     ('00000001', 'ABC1', '0422111163', '住所１', '説明１'),
@@ -26,7 +37,14 @@ initData = [
 selectTable = 'select * from company'
 
 selectMaxcompanyId = 'select max(companyId) from company'
-updateTable = 'UPDATE company SET companyName=?, telephoneNumber=?, address=?, discription=? WHERE companyId=?'
+
+updateTable = '''UPDATE company SET 
+                                companyName=?, 
+                                telephoneNumber=?, 
+                                address=?, 
+                                discription=? WHERE companyId=?
+              '''
+
 #  delTable = 'DELETE from company WHERE companyId=? ' ->うまく展開しないため、formatで対応した
 delTable = 'DELETE from company WHERE companyId="{0}" '
 
