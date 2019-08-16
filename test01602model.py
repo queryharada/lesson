@@ -43,7 +43,7 @@ def initdb():
         cur.execute(dropTable)
         cur.execute(createTable)
         # executemanyメソッドを実行する
-        # cur.executemany(insertTable, initData)
+        cur.executemany(insertTable, initData)
         # コミット
         conn.commit()
 
