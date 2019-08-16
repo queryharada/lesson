@@ -43,7 +43,7 @@ def initdb():
         cur.execute(dropTable)
         cur.execute(createTable)
         # executemanyメソッドを実行する
-        cur.executemany(insertTable, initData)
+        # cur.executemany(insertTable, initData)
         # コミット
         conn.commit()
 
@@ -119,8 +119,8 @@ def insertData(requestForm):
             pass
 
         #  カウント(+1)する。
-        if v is None:
-            num = 0
+        if v[0] is None:
+            num = 1
         else:
             num = int(v[0]) + 1
         # チェック　companyId　
