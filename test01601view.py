@@ -50,7 +50,7 @@ tableTc = '''       </table>
 #      <textarea>...</textarea>
 #
 inputTextarea = ''' <p>＜会社更新＞</p>
-                    <p>会社ID　:{0}</p>
+                    <p>会社ID　:<input type="text" name="companyIdKey" value="{0}" readonly></p>
                     <p>会社名　:<input type="text" name="companyName" size="40" value="{1}"></p>
                     <p>電話番号:<input type="text" name="telephoneNumber" size="40" value="{2}"></p>
                     <p>住所　　:<textarea name="address" rows="2" cols="60" >{3}</textarea></p>

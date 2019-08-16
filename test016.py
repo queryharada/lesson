@@ -57,7 +57,7 @@ def router():
     # 更新
     #
     if request.form['procSelect'] == 'update':
-        if not 'companyId' in request.form:
+        if request.form['companyIdKey'] == '':
             messageId = '002'  # ''会社一覧が選択されていません'
             companyId = ''
         else:
