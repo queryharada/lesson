@@ -27,8 +27,7 @@ selectTable = 'select * from company'
 
 selectMaxcompanyId = 'select max(companyId) from company'
 updateTable = 'UPDATE company SET companyName=?, telephoneNumber=?, address=?, discription=? WHERE companyId=?'
-#  うまく展開しないため、formatで対応した
-# delTable = 'DELETE from company WHERE companyId=? '
+#  delTable = 'DELETE from company WHERE companyId=? ' ->うまく展開しないため、formatで対応した
 delTable = 'DELETE from company WHERE companyId="{0}" '
 
 
