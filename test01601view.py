@@ -13,7 +13,7 @@ formEnd = '''       <p>＜処理＞</p>
                             <input type="radio" name="procSelect" value="update">更新
                             <input type="radio" name="procSelect" value="delete">削除
                         </p>
-                    <p>{0}</P>
+                    <p><font color="#FF0000">{0}</font></P>
                     <p><input type="submit" value="送信"></p>
                 </form>
               </div>
