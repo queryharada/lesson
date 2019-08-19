@@ -70,6 +70,7 @@ def checkCompanyId(num):
     # チェック　companyId　
     if num > 99999999:
         return True
+
     return False
 
 
@@ -77,6 +78,7 @@ def checkCompanyName(companyName):
     # チェック　companyName 型、桁数
     if len(companyName) > 40:
         return True
+
     return False
 
 
@@ -95,6 +97,7 @@ def checkAddress(address):
     # チェック　address　型、桁数
     if len(address) > 256:
         return True
+
     return False
 
 
