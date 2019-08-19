@@ -15,7 +15,8 @@ createTable = '''create table company (
                     telephoneNumber varchar(12),
                     address         varchar(256),
                     discription     text
-                )'''
+                  )
+              '''
 
 insertTable = '''insert into company (
                     companyId, 
@@ -38,7 +39,7 @@ selectTable = 'select * from company order by companyId'
 
 selectMaxcompanyId = 'select max(companyId) from company'
 
-updateTable = '''update company SET 
+updateTable = '''update company set 
                     companyName=?, 
                     telephoneNumber=?, 
                     address=?, 
