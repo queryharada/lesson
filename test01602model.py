@@ -10,20 +10,20 @@ dbname = 'company.db'
 dropTable = 'drop table company'
 
 createTable = '''create table company (
-                    companyId  char(8) primary key,
-                    companyName varchar(128),
+                    companyId       char(8) primary key,
+                    companyName     varchar(128),
                     telephoneNumber varchar(12),
-                    address varchar(256),
-                    discription text
+                    address         varchar(256),
+                    discription     text
                 )'''
 
 insertTable = '''insert into company (
-                                companyId, 
-                                companyName, 
-                                telephoneNumber, 
-                                address, 
-                                discription
-                                ) values (?,?,?,?,?)
+                    companyId, 
+                    companyName, 
+                    telephoneNumber, 
+                    address, 
+                    discription
+                 ) values (?,?,?,?,?)
               '''
 
 initData = [
@@ -38,15 +38,16 @@ selectTable = 'select * from company order by companyId'
 
 selectMaxcompanyId = 'select max(companyId) from company'
 
-updateTable = '''UPDATE company SET 
-                                companyName=?, 
-                                telephoneNumber=?, 
-                                address=?, 
-                                discription=? WHERE companyId=?
+updateTable = '''update company SET 
+                    companyName=?, 
+                    telephoneNumber=?, 
+                    address=?, 
+                    discription=? 
+                    where companyId=?
               '''
 
 #  delTable = 'DELETE from company WHERE companyId=? ' ->うまく展開しないため、formatで対応した
-delTable = 'DELETE from company WHERE companyId="{0}" '
+delTable = 'delete from company where companyId="{0}" '
 
 
 #

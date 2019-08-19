@@ -16,21 +16,21 @@ tableTh = '''
         <table border="0" width="900" cellspacing="0" cellpadding="5" bordercolor="#ffffff">
             <tr>
                 <th bgcolor="#ffffff" align="center" width="10"><font color="#000000"></font></th>
-                    <th bgcolor="#ffffff" align="left" width="150"><font color="#000000">会社ID</font></th>
-                    <th bgcolor="#ffffff" align="left" width="150"><font color="#000000">会社名</font></th>
-                    <th bgcolor="#ffffff" align="left" width="200"><font color="#000000">電話番号</font></th>
-                    <th bgcolor="#ffffff" align="left" width="200"><font color="#000000">住所</font></th>
-                    <th bgcolor="#ffffff" align="left" width="200"><font color="#000000">説明</font></th>
+                <th bgcolor="#ffffff" align="left" width="150"><font color="#000000">会社ID</font></th>
+                <th bgcolor="#ffffff" align="left" width="150"><font color="#000000">会社名</font></th>
+                <th bgcolor="#ffffff" align="left" width="200"><font color="#000000">電話番号</font></th>
+                <th bgcolor="#ffffff" align="left" width="200"><font color="#000000">住所</font></th>
+                <th bgcolor="#ffffff" align="left" width="200"><font color="#000000">説明</font></th>
             </tr>
           '''
 tableTd = '''
              <tr>
-                    <td bgcolor="{5}" align="center" width="10"><input type="radio" name="companyId" value="{0}" {6}></td>
-                    <td bgcolor="{5}" valign="top" width="150">{0}</td>
-                    <td bgcolor="{5}" valign="top" width="200">{1}</td>
-                    <td bgcolor="{5}" valign="top" width="200">{2}</td>
-                    <td bgcolor="{5}" valign="top" width="200">{3}</td>
-                    <td bgcolor="{5}" valign="top" width="200">{4}</td>
+                <td bgcolor="{5}" align="center" width="10"><input type="radio" name="companyId" value="{0}" {6}></td>
+                <td bgcolor="{5}" valign="top" width="150">{0}</td>
+                <td bgcolor="{5}" valign="top" width="200">{1}</td>
+                <td bgcolor="{5}" valign="top" width="200">{2}</td>
+                <td bgcolor="{5}" valign="top" width="200">{3}</td>
+                <td bgcolor="{5}" valign="top" width="200">{4}</td>
              </tr>
           '''
 tableTc = '''

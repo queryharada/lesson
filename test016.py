@@ -10,7 +10,7 @@ from test01602model import *
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     #
     # 初期(DBからデータを取得)
@@ -24,7 +24,7 @@ def router():
     messageId = '000'
 
     #
-    # 処理選択チェック
+    # 処理チェック
     #
     if not 'procSelect' in request.form:
         rowList = selectData()
