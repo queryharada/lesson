@@ -10,5 +10,6 @@ for i in range(1, 10):
     line = ''
     for j in range(1, 10):
         # line += str(i*j).rjust(4)
-        line += rj(i * j, 4)
+        # line += rj(i * j, 4)
+        line += ' ' * (4 - len(str(i * j))) + str(i * j)
     print(line)
