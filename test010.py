@@ -1,10 +1,7 @@
-def fact(n):
-    if n == 1:
-        return 1
-    else:
-        return n * fact(n - 1)
+# -*- coding:utf-8 -*-
 
-
-n = 8
-for i in range(1, n):
-    print(fact(i))
+for i in range(1,10):
+    line = ''
+    for j in range(1,10):
+        line += str(i*j).rjust(4)
+    print(line)
