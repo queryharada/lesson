@@ -8,7 +8,7 @@ pnArray = [2]
 # 抽出する最大値
 maxNumber = 10000
 # 3からmaxNumberまでを確かめる
-for chkNumber in range(3, maxNumber):
+for chkNumber in range(3, maxNumber + 1):
     # チェックフラグ初期化
     pnChk = True
     # 今まで抽出した素数で割れるかチェック
