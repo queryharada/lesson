@@ -123,11 +123,11 @@ def selectData():
 def insertData(requestForm):
     # チェック　companyName 型、桁数
     if checkCompanyName(requestForm['companyName']):
-        return None, '102'
+        return None, '105'
 
     # チェック　telephoneNumber　型、桁数、数字、ハイフン
     if checkTelephoneNumber(requestForm['telephoneNumber']):
-        return None, '103'
+        return None, '106'
 
     # チェック　address　型、桁数
     if checkAddress(requestForm['address']):
@@ -147,7 +147,7 @@ def insertData(requestForm):
             num = int(v[0]) + 1
         # チェック　companyId　
         if checkCompanyId(num):
-            return None, '101'
+            return None, '105'
 
         maxId = str(num).zfill(8)
         row = (
@@ -169,11 +169,11 @@ def insertData(requestForm):
 def updateData(requestForm):
     # チェック　companyName 型、桁数
     if checkCompanyName(requestForm['companyName']):
-        return None, '102'
+        return None, '106'
 
     # チェック　telephoneNumber　型、桁数、数字、ハイフン
     if checkTelephoneNumber(requestForm['telephoneNumber']):
-        return None, '103'
+        return None, '108'
 
     # チェック　address　型、桁数
     if checkAddress(requestForm['address']):

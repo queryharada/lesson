@@ -71,7 +71,7 @@ def router():
     #
     if request.form['procSelect'] == 'delete':
         if not 'companyId' in request.form:
-            messageId = '002'  # ''会社一覧が選択されていません'
+            messageId = '009'  # ''会社一覧が選択されていません'
         else:
             deleteData(request.form['companyId'])
         companyId = ''

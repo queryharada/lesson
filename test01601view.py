@@ -78,6 +78,11 @@ footerMessage['101'] = '会社Idは99999999を超えて採番できません'
 footerMessage['102'] = '会社名、桁数を超えている'
 footerMessage['103'] = '電話番号、桁数を超えている'
 footerMessage['104'] = '住所、桁数を超えている'
+footerMessage['105'] = '登録できません。(会社ID)'
+footerMessage['106'] = '登録できません。(電話番号)'
+footerMessage['107'] = '更新できません。(会社名)'
+footerMessage['108'] = '更新できません。(電話番号)'
+footerMessage['109'] = '削除できません。(会社ID)'
 
 
 #
