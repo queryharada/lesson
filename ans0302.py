@@ -14,8 +14,22 @@ def hexToInt(hexStr):
     return value
 
 
+def intToHex(val):
+    if val == 0:
+        return '00'
+
+    i = 0
+    hexStr = ''
+    digits = 0
+    while val > 0:
+        modV = val % 16
+        hexStr += hexString[modV]
+        val = int(val / 16)
+    return hexStr[::-1]
+
+
 numList = []
-while len(numList) < 4:
+while len(numList) < 2:
     inputStr = input("Please Enter Number(HEX): ")
     inputStr = inputStr.upper()
     isNumChk = True
@@ -30,17 +44,19 @@ while len(numList) < 4:
         print('Enter Number is not HEX format')
 
 print(numList)
-minValue = 0
+minValue = -1
 maxValue = 0
 totValue = 0
 for v in numList:
-    if v < minValue:
+    if (minValue == -1) or (v < minValue):
         minValue = v
     if v > maxValue:
         maxValue = v
     totValue += v
 
-print('min value :')
+print('min value :',intToHex(minValue))
+print('max value :',intToHex(maxValue))
+print('total value :',intToHex(totValue))
 
 if __name__ == "__main__":
     pass
