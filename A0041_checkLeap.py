@@ -12,8 +12,9 @@ def check_leap_year(year):
         return False
 
 
-def main():
-    """ エントリーポイント """
+
+
+if __name__ == "__main__":
     years = [2016, 2000, 1990, 1980]
 
     for year in years:
@@ -22,6 +23,3 @@ def main():
         else:
             print(str(year) + "年は平年です。")
 
-
-if __name__ == "__main__":
-    main()

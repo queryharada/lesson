@@ -22,7 +22,7 @@ for chkNumber in range(3, maxNumber + 1):
         pnArray.append(chkNumber)
 
 # 抽出した素数表示
-line = ""
+line = ''
 for pnNumber in pnArray:
     line = line + repr(pnNumber).rjust(len(str(maxNumber)))
     if len(line) > 80:
