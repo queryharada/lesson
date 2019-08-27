@@ -29,6 +29,7 @@ def intToHex(intVal):
     # 文字列をリバース
     return hexStr[::-1]
 
+
 # HEX文字列入力
 numList = []
 while len(numList) < ENTERCOUNT:
