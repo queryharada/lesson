@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 from flask import Flask, request
 
-from test01601view import *
-from test01602model import *
+from A0130_test01601view import *
+from A0130_test01602model import *
 
 #
 # Flask
