@@ -15,15 +15,15 @@ def hexToInt(hexStr):
     return value
 
 
-def intToHex(val):
-    if val == 0:
+def intToHex(intVal):
+    if intVal == 0:
         return '00'
     i = 0
     hexStr = ''
-    while val > 0:
-        modV = val % len(BASESTRING)
+    while intVal > 0:
+        modV = intVal % len(BASESTRING)
         hexStr += BASESTRING[modV]
-        val = int(val / len(BASESTRING))
+        intVal = int(intVal / len(BASESTRING))
     return hexStr[::-1]
 
 
