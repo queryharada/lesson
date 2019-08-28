@@ -38,7 +38,7 @@ def intToHex(intVal):
         hexStr += BASESTRING[modV]
         intVal = int(intVal / len(BASESTRING))
 
-    # 文字列をリバース reversed(hexStr) hexStr[::-1]
+    # 文字列をリバース hexStr.reversed() hexStr[::-1]
     return reverseStr(hexStr)
 
 
