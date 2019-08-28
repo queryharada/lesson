@@ -16,6 +16,17 @@ def hexToInt(hexStr):
     return value
 
 
+# 文字列をリバース
+def reverseStr(srcStr):
+    srcIndex = len(srcStr)
+    dstStr = ''
+    while srcIndex > 0:
+        dstStr += srcStr[srcIndex - 1]
+        srcIndex -= 1
+
+    return dstStr
+
+
 # 数値をHEX文字列へ変換
 def intToHex(intVal):
     if intVal == 0:
@@ -26,8 +37,9 @@ def intToHex(intVal):
         modV = intVal % len(BASESTRING)
         hexStr += BASESTRING[modV]
         intVal = int(intVal / len(BASESTRING))
-    # 文字列をリバース
-    return hexStr[::-1]
+
+    # 文字列をリバース reversed(hexStr) hexStr[::-1]
+    return reverseStr(hexStr)
 
 
 if __name__ == "__main__":
