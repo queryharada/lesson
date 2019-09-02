@@ -7,16 +7,16 @@
 #   5 その年はうるう年ではありません (この年は 365 日です)。
 
 year = 2020
-if (year % 4) == 0:
-    if (year % 100) == 0:
-        if (year % 400) == 0:
+if (year % 4) == 0:             # 1
+    if (year % 100) == 0:       # 2
+        if (year % 400) == 0:   # 3
             print("うるう年")
         else:
-            print("平年")
+            print("平年")       # 5
     else:
-        print("うるう年")
+        print("うるう年")       # 4
 else:
-    print("平年")
+    print("平年")               # 5
 
 if (year % 400) == 0:
     print("うるう年")
