@@ -56,15 +56,18 @@ delTable = 'delete from company where companyId="{0}" '
 #
 def initdb():
     with closing(sqlite3.connect(dbname)) as conn:
-        # カーソル取得
-        cur = conn.cursor()
-        # executeメソッドでSQL文を実行する
-        cur.execute(dropTable)
-        cur.execute(createTable)
-        # executemanyメソッドを実行する
-        cur.executemany(insertTable, initData)
-        # コミット
-        conn.commit()
+        try:
+            # カーソル取得
+            cur = conn.cursor()
+            # executeメソッドでSQL文を実行する
+            cur.execute(dropTable)
+            cur.execute(createTable)
+            # executemanyメソッドを実行する
+            cur.executemany(insertTable, initData)
+            # コミット
+            conn.commit()
+        except sqlite3.Error as e:
+            print("An error occurred:", e.args[0])
 
 
 def checkCompanyId(num):
@@ -108,12 +111,16 @@ def checkAddress(address):
 def selectData():
     rowData = list()
     with closing(sqlite3.connect(dbname)) as conn:
-        # カーソル取得
-        cur = conn.cursor()
-        # executeメソッドでSQL文を実行する
-        for row in cur.execute(selectTable):
-            # データを追加
-            rowData.append(row)
+        try:
+            # カーソル取得
+            cur = conn.cursor()
+            # executeメソッドでSQL文を実行する
+            for row in cur.execute(selectTable):
+                # データを追加
+                rowData.append(row)
+        except sqlite3.Error as e:
+            print("An error occurred:", e.args[0])
+
     return rowData
 
 
@@ -134,31 +141,34 @@ def insertData(requestForm):
         return None, '104'
 
     with closing(sqlite3.connect(dbname)) as conn:
-        # カーソル取得
-        cur = conn.cursor()
-        #  最大会社ID取得
-        for v in cur.execute(selectMaxcompanyId):
-            pass
+        try:
+            # カーソル取得
+            cur = conn.cursor()
+            #  最大会社ID取得
+            for v in cur.execute(selectMaxcompanyId):
+                pass
 
-        #  カウント(+1)する。
-        if v[0] is None:
-            num = 1
-        else:
-            num = int(v[0]) + 1
-        # チェック　companyId　
-        if checkCompanyId(num):
-            return None, '105'
+            #  カウント(+1)する。
+            if v[0] is None:
+                num = 1
+            else:
+                num = int(v[0]) + 1
+            # チェック　companyId　
+            if checkCompanyId(num):
+                return None, '105'
 
-        maxId = str(num).zfill(8)
-        row = (
-            maxId,
-            requestForm['companyName'],
-            requestForm['telephoneNumber'],
-            requestForm['address'],
-            requestForm['discription']
-        )
-        cur.execute(insertTable, row)
-        conn.commit()
+            maxId = str(num).zfill(8)
+            row = (
+                maxId,
+                requestForm['companyName'],
+                requestForm['telephoneNumber'],
+                requestForm['address'],
+                requestForm['discription']
+            )
+            cur.execute(insertTable, row)
+            conn.commit()
+        except sqlite3.Error as e:
+            print("An error occurred:", e.args[0])
 
     return maxId, '000'
 
@@ -180,17 +190,21 @@ def updateData(requestForm):
         return None, '104'
 
     with closing(sqlite3.connect(dbname)) as conn:
-        # カーソル取得
-        cur = conn.cursor()
-        row = (
-            requestForm['companyName'],
-            requestForm['telephoneNumber'],
-            requestForm['address'],
-            requestForm['discription'],
-            requestForm['companyId']
-        )
-        cur.execute(updateTable, row)
-        conn.commit()
+        try:
+            # カーソル取得
+            cur = conn.cursor()
+            row = (
+                requestForm['companyName'],
+                requestForm['telephoneNumber'],
+                requestForm['address'],
+                requestForm['discription'],
+                requestForm['companyId']
+            )
+            cur.execute(updateTable, row)
+            conn.commit()
+        except sqlite3.Error as e:
+            print("An error occurred:", e.args[0])
+
     return requestForm['companyId'], '000'
 
 
@@ -199,7 +213,10 @@ def updateData(requestForm):
 #
 def deleteData(companyId):
     with closing(sqlite3.connect(dbname)) as conn:
-        # カーソル取得
-        cur = conn.cursor()
-        cur.execute(delTable.format(companyId))
-        conn.commit()
+        try:
+            # カーソル取得
+            cur = conn.cursor()
+            cur.execute(delTable.format(companyId))
+            conn.commit()
+        except sqlite3.Error as e:
+            print("An error occurred:", e.args[0])
