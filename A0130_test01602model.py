@@ -7,7 +7,7 @@ from contextlib import closing
 #
 dbname = 'company.db'
 
-dropTable = 'drop table company'
+dropTable = 'drop table if exists company'
 
 createTable = '''create table company (
                     companyId       char(8) primary key,
