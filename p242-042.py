@@ -11,6 +11,7 @@ def salByDay2(days, sal):
 
     return
 
+
 if __name__ == "__main__":
     salByDay1(1)
     salByDay2(1, 1)
