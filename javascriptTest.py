@@ -22,7 +22,7 @@ def post():
     result = request.form["param"]  # Postで送ったときのパラメータの名前を指定する
     # パラメータをローカルのファイルに書き込むだけ
     with open("./javascriptTest", mode='a') as f:
-        f.write(datetime.now().strftime("%Y/%m/%d %H:%M:%S") + ':' + result + "\n")
+        f.write(datetime.now().strftime("%Y/%m/%d %H:%M:%S") + ' : ' + result + "\n")
     return make_response(result)
 
 
