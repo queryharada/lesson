@@ -8,6 +8,17 @@ api = Flask(__name__)
 CORS(api)  # CORS有効化
 
 
+@api.route('/del', methods=['GET'])
+def delFirstLine():
+    with open("./javascriptTest", mode='r') as f:
+        lines = f.readlines()
+
+    with open("./javascriptTest", mode='w') as f:
+        lines = f.writelines([item for item in lines[1:]])
+
+    return lines[1:]
+
+
 @api.route('/get', methods=['GET'])
 def get():
     result = ''

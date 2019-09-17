@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>APIテスト</title>
+    <title>javascript/Flask test</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script>
     function get_func(url) {
@@ -11,7 +11,6 @@
       .then(function(text) {
         let view = document.getElementById("view")
         view.textContent = ""
-        // 取得テキストを一行ごとにループ（ただ改行して表示しているだけ）
         text.split("\n").forEach((value) => {
           view.insertAdjacentHTML('beforeend', value);
           view.insertAdjacentHTML('beforeend', "<br>");
@@ -20,25 +19,41 @@
     }
 
     function post_func(url) {
-      // Postで送るパラメータを作成
+      // Postで送る
       let formData = new FormData();
       formData.append('param', document.getElementById('post_param').value);
       fetch(url, {
         method: 'POST',  // methodを指定しないとGETになる
         body: formData,  // Postで送るパラメータを指定
       })
-      .then(function() {  // Postした後に結果をGetする（コールバックなのでPostが実行完了してから実行される）
+      .then(function() {  // Postした後に結果をGetする（コールバック）
         get_func('http://127.0.0.1:4000/get');  // 今回は「http://192.168.1.100:4000/get」
       });
       // ここにget_funcを書くとPostとGetがほぼ同時に行われてしまい、Post結果をGetできない
       // get_func('APIのGet用URL');
     }
 
+
+    function del_func(url) {
+      fetch(url, {
+        method: 'GET',  // methodを指定しないとGETになる
+      })
+      .then(function() {
+        get_func('http://127.0.0.1:4000/get');  // 今回は「http://192.168.1.100:4000/get」
+      });
+      // ここにget_funcを書くとほぼ同時に行われてしまい、結果をGetできない
+      // get_func('APIのGet用URL');
+    }
+
+
     </script>
 </head>
 <body>
 <input type="text" id="post_param" size=20 value="テスト文字列">
-<input type="submit" value="送信" onClick="post_func('http://127.0.0.1:4000/post')">  <!-- 今回は「http://192.168.1.100:4000/post」-->
+<input type="submit" value="追加" onClick="post_func('http://127.0.0.1:4000/post')">
+<input type="submit" value="削除" onClick="del_func('http://127.0.0.1:4000/del')">
+<input type="submit" value="更新" onClick="get_func('http://127.0.0.1:4000/get')">
+<!-- 今回は「http://192.168.1.100:4000/post」-->
 <div id="view"></div>
 </body>
 </html>
