@@ -1,5 +1,8 @@
+# -*- coding:utf-8 -*-
 from flask import Flask, jsonify, abort, make_response, render_template, request
 from flask_cors import CORS
+
+from datetime import datetime
 
 api = Flask(__name__)
 CORS(api)  # CORS有効化
@@ -9,7 +12,7 @@ CORS(api)  # CORS有効化
 def get():  # 関数名は重複していなければなんでもよい
     result = ""
     # ローカルのファイルを全部読み込んで返すだけ
-    with open("./datafile", mode='r') as f:
+    with open("./javascriptTest", mode='r') as f:
         result += f.read()
     return result
 
@@ -18,14 +21,14 @@ def get():  # 関数名は重複していなければなんでもよい
 def post():
     result = request.form["param"]  # Postで送ったときのパラメータの名前を指定する
     # パラメータをローカルのファイルに書き込むだけ
-    with open("./datafile", mode='a') as f:
-        f.write(result + "\n")
+    with open("./javascriptTest", mode='a') as f:
+        f.write(datetime.now().strftime("%Y/%m/%d %H:%M:%S") + ':' + result + "\n")
     return make_response(result)
+
 
 @api.route('/')
 def index():
     return render_template('index.html')
-
 
 
 # 4000番ポートでWebサーバを起動する
