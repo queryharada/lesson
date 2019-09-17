@@ -37,7 +37,7 @@ def post():
 
 @api.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index2.html')
 
 
 # 4000番ポートでWebサーバを起動する
