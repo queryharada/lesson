@@ -16,7 +16,7 @@ def delFirstLine():
     with open("./javascriptTest", mode='w') as f:
         lines = f.writelines([item for item in lines[1:]])
 
-    return lines[1:]
+    return get()
 
 
 @api.route('/get', methods=['GET'])
@@ -37,7 +37,21 @@ def post():
 
 @api.route('/')
 def index():
-    return render_template('index2.html')
+    with open("./templates/index.html", mode='r', encoding='utf-8') as f:
+        linesIndex = f.readlines()
+
+    linesScript = ''
+    with open("./templates/javascriptTest.js", mode='r', encoding='utf-8') as f:
+        linesScript += f.read()
+
+    lines = ''
+    for line in linesIndex:
+        if 'javascriptTest.js' in line:
+            lines += '<script>' + linesScript + '</script>'
+        else:
+            lines += line
+
+    return lines
 
 
 # 4000番ポートでWebサーバを起動する

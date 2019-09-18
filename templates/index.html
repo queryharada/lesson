@@ -2,55 +2,13 @@
 <head>
     <title>javascript/Flask test</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script>
-    // データ表示
-    function get_func(url) {
-      fetch(url)
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(text) {     // 結果をGetする（コールバック）
-        let view = document.getElementById("view")
-        view.textContent = ""
-        text.split("\n").forEach((value) => {
-          view.insertAdjacentHTML('beforeend', value);
-          view.insertAdjacentHTML('beforeend', "<br>");
-        })
-      });
-    }
-
-    // データ追加
-    function post_func(url) {
-      // Postで送る
-      let formData = new FormData();
-      formData.append('param', document.getElementById('post_param').value);
-      fetch(url, {
-        method: 'POST',         // methodを指定しないとGETになる
-        body: formData,         // Postで送るパラメータを指定
-      })
-      .then(function() {        // 結果をGetする（コールバック）
-        get_func('http://127.0.0.1:4000/get');
-      });
-    }
-
-    // データ削除
-    function del_func(url) {
-      fetch(url, {
-        method: 'GET',
-      })
-      .then(function() {        // 結果をGetする（コールバック）
-        get_func('http://127.0.0.1:4000/get');
-      });
-    }
-    </script>
-
+    <script type="text/javascript" src="javascriptTest.js"></script>
 </head>
 <body>
-<input type="text" id="post_param" size=20 value="テスト文字列">
-<input type="submit" value="追加" onClick="post_func('http://127.0.0.1:4000/post')">
-<input type="submit" value="削除" onClick="del_func('http://127.0.0.1:4000/del')">
-<input type="submit" value="更新" onClick="get_func('http://127.0.0.1:4000/get')">
-<!-- 今回は「http://192.168.1.100:4000/post」-->
-<div id="view"></div>
+    <input type="text" id="post_param" size=20 value="テスト文字列">
+    <input type="submit" value="追加" onClick="post_func('http://127.0.0.1:4000/post')">
+    <input type="submit" value="削除" onClick="del_func('http://127.0.0.1:4000/del')">
+    <input type="submit" value="更新" onClick="get_func('http://127.0.0.1:4000/get')">
+    <div id="view"></div>
 </body>
 </html>
