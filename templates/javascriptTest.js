@@ -11,6 +11,7 @@ function get_func(url) {
       view.insertAdjacentHTML('beforeend', value);
       view.insertAdjacentHTML('beforeend', "<br>");
     })
+    playSound();
   });
 }
 
@@ -25,6 +26,7 @@ function post_func(url) {
   })
   .then(function() {        // 結果をGetする（コールバック）
     get_func('http://127.0.0.1:4000/get');
+    playSound();
   });
 }
 
@@ -35,5 +37,16 @@ function del_func(url) {
   })
   .then(function() {        // 結果をGetする（コールバック）
     get_func('http://127.0.0.1:4000/get');
+    playSound();
   });
+}
+
+var synth;
+window.onload = function(){
+  synth = new Tone.Synth().toMaster();
+}
+
+function playSound() {
+  var array = ["C4" ,"C#4","D4" ,"D#4","E4" ,"F4" ,"F#4","G4" ,"G#4","A4" ,"A#4","B4" ,"C5" ];
+  synth.triggerAttackRelease(array[Math.floor(Math.random() * array.length)], "8n");
 }
