@@ -37,21 +37,15 @@ def post():
 
 @api.route('/')
 def index():
-    with open("./templates/index.html", mode='r', encoding='utf-8') as f:
-        linesIndex = f.readlines()
-
     linesScript = ''
     with open("./templates/javascriptTest.js", mode='r', encoding='utf-8') as f:
         linesScript += f.read()
 
-    lines = ''
-    for line in linesIndex:
-        if 'javascriptTest.js' in line:
-            lines += '<script>' + linesScript + '</script>'
-        else:
-            lines += line
-
-    return lines
+    d = [{"name": "Hoge", "value": "1"},
+         {"name": "Fuga", "value": "2"},
+         {"name": "Foo", "value": "3"}]
+    l = ["000", "113", "124", "125"]
+    return render_template('index.html', javascriptTest=linesScript, l=l, d=d)
 
 
 # 4000番ポートでWebサーバを起動する
