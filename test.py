@@ -1,23 +1,12 @@
-def index():
-    with open("./templates/index.html", mode='r', encoding='utf-8') as f:
-        try:
-            linesIndex = f.readlines()
-        except:
-            import traceback
-            traceback.print_exc()
+from flask import Flask
 
-    with open("./templates/javascriptTest.js", mode='r', encoding='utf-8') as f:
-        linesScript = '<script>' + f.read() + '</script>'
+app = Flask(__name__)
 
-    lines = ''
-    for line in linesIndex:
-        if 'javascriptTest.js' in line:
-            lines += linesScript
-        else:
-            lines += line
 
-    return lines
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
 
 
 if __name__ == "__main__":
-    print(index())
+    app.run(debug=True)
