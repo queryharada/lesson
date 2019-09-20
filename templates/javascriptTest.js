@@ -25,7 +25,8 @@ function post_func(url) {
     body: formData,         // Postで送るパラメータを指定
   })
   .then(function() {        // 結果をGetする（コールバック）
-    get_func('http://127.0.0.1:4000/get');
+    var url2 = url.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+    get_func('http://' + url2 + '/get');
     playSound();
   });
 }
@@ -36,7 +37,8 @@ function del_func(url) {
     method: 'GET',
   })
   .then(function() {        // 結果をGetする（コールバック）
-    get_func('http://127.0.0.1:4000/get');
+    var url2 = url.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1];
+    get_func('http://' + url2 + '/get');
     playSound();
   });
 }

@@ -10,9 +10,9 @@
 </head>
 <body>
     <input type="text" id="post_param" size=20 value="テスト文字列">
-    <input type="submit" value="追加" onClick="post_func('http://127.0.0.1:4000/post')">
-    <input type="submit" value="削除" onClick="del_func('http://127.0.0.1:4000/del')">
-    <input type="submit" value="更新" onClick="get_func('http://127.0.0.1:4000/get')">
+    <input type="submit" value="追加" onClick="post_func('{{url}}post')">
+    <input type="submit" value="削除" onClick="del_func('{{url}}del')">
+    <input type="submit" value="更新" onClick="get_func('{{url}}get')">
     <div id="view"></div>
     <ul>
     {% for item in l %}

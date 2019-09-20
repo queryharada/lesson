@@ -7,6 +7,11 @@ from datetime import datetime
 api = Flask(__name__)
 CORS(api)  # CORS有効化
 
+HTTP = 'http://'
+DOMAIN = '127.0.0.1'
+PORT = 4000
+URL = HTTP + DOMAIN + ':' + str(PORT) + '/'
+
 
 @api.route('/del', methods=['GET'])
 def delFirstLine():
@@ -45,9 +50,8 @@ def index():
          {"name": "Fuga", "value": "2"},
          {"name": "Foo", "value": "3"}]
     l = ["000", "113", "124", "125"]
-    return render_template('index.html', javascriptTest=linesScript, l=l, d=d)
-
+    return render_template('index.html', url=URL, javascriptTest=linesScript, l=l, d=d)
 
 # 4000番ポートでWebサーバを起動する
 if __name__ == '__main__':
-    api.run(host='127.0.0.1', port=4000, debug=True)
+    api.run(host=DOMAIN, port=PORT, debug=True)
