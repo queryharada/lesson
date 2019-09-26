@@ -43,12 +43,21 @@ function del_func(url) {
   });
 }
 
-var synth;
-window.onload = function(){
-  synth = new Tone.Synth().toMaster();
-}
 
 function playSound() {
-  var array = ["C4" ,"C#4","D4" ,"D#4","E4" ,"F4" ,"F#4","G4" ,"G#4","A4" ,"A#4","B4" ,"C5" ];
-  synth.triggerAttackRelease(array[Math.floor(Math.random() * array.length)], "8n");
+    // メロディを鳴らす音源
+    var synth = new Tone.Synth().toMaster();
+    // メロディの音階データ
+    var melody_data = [
+      'E5', 'C5', 'G4', 'C5', 'D5', 'G5', null, 'G4',
+      'D5', 'E5', 'D5', 'G4', 'C5', null, null, null // nullは休符
+    ];
+    function addMelody(time, note) {
+      synth.triggerAttackRelease(note, '8n', time);
+    }
+    var melody = new Tone.Sequence(addMelody, melody_data).start();
+    // テンポを指定
+    Tone.Transport.bpm.value = 140
+
+    Tone.Transport.start();
 }
