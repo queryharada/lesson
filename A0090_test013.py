@@ -51,7 +51,7 @@ with codecs.open(filePathA, 'r', 'utf-8') as fsA, \
             # データがない
             lineWriteA = ' ' * maxColun
         else:
-            # スペース調整
+            # スペース調整 + 改行削除
             lineWriteA = lineReadA.replace('\r\n','') + (' ' * (maxColun - columLen(lineReadA.replace('\r\n',''))))
 
         # ファイルBを1行リード
@@ -60,7 +60,7 @@ with codecs.open(filePathA, 'r', 'utf-8') as fsA, \
             # データがない
             lineWriteB = ' ' * maxColun
         else:
-            # スペース調整
+            # スペース調整 + 改行削除
             lineWriteB = lineReadB.replace('\r\n','') + (' ' * (maxColun - columLen(lineReadB.replace('\r\n',''))))
 
         # 行番号 + ':' + ファイルAの行 + ':' + ファイルBの行 を連結、出力
