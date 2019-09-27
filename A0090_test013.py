@@ -2,9 +2,9 @@
 import codecs
 import unicodedata
 
-filePathA = "C:/Users/harada/001/A.TXT"
-filePathB = "C:/Users/harada/001/B.TXT"
-filePathC = "C:/Users/harada/001/C.TXT"
+filePathA = "tmp/A.TXT"
+filePathB = "tmp/B.TXT"
+filePathC = "tmp/C.TXT"
 
 
 #
@@ -49,10 +49,10 @@ with codecs.open(filePathA, 'r', 'utf-8') as fsA, \
         lineReadA = fsA.readline()
         if lineReadA == "":
             # データがない
-            lineWriteB = ' ' * maxColun
+            lineWriteA = ' ' * maxColun
         else:
             # スペース調整
-            lineWriteA = lineReadA.replace('\n','') + (' ' * (maxColun - columLen(lineReadA.replace('\n',''))))
+            lineWriteA = lineReadA.replace('\r\n','') + (' ' * (maxColun - columLen(lineReadA.replace('\r\n',''))))
 
         # ファイルBを1行リード
         lineReadB = fsB.readline()
@@ -61,7 +61,7 @@ with codecs.open(filePathA, 'r', 'utf-8') as fsA, \
             lineWriteB = ' ' * maxColun
         else:
             # スペース調整
-            lineWriteB = lineReadB.replace('\n','') + (' ' * (maxColun - columLen(lineReadB.replace('\n',''))))
+            lineWriteB = lineReadB.replace('\r\n','') + (' ' * (maxColun - columLen(lineReadB.replace('\r\n',''))))
 
         # 行番号 + ':' + ファイルAの行 + ':' + ファイルBの行 を連結、出力
         lineWrite = str(rowNum).zfill(3) + ':' + lineWriteA + '|' + lineWriteB
